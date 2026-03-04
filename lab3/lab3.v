@@ -47,7 +47,7 @@ module lab3 (
 
 		if (SW[4] == 0 && c_out == 1) begin
 			HEX1 = 8'b11111001;
-		end else if (SW[4] == 1 && c_out == 0) begin
+		end else if (SW[4] == 1 && c_out == 1) begin
 			HEX1 = 8'b10111111;
 			f_display = ~f + 1;
 		end else begin
