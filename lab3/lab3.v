@@ -37,11 +37,11 @@ module lab3 (
 
 	assign HEX5 = hex5;
 	assign HEX3 = hex3;
-	assign HEX2 = 8'b11111111;
+	assign HEX2 = 8'b10110111;
 	assign HEX0 = hex0;
 
 	always @(*) begin
-		HEX4 = (SW[4] == 0) ? 8'b10001111 : 8'b10110111;
+		HEX4 = (SW[4] == 0) ? 8'b10001111 : 8'b10111111;
 
 		f_display = f;
 
