@@ -7,6 +7,7 @@ module lab3 (
 	wire [3:0] a0, a1, f;
 	wire c_out;
 	wire [7:0] hex5, hex3, hex0;
+	reg [3:0] f_display;
 
 	assign a0 = SW[8:5];
 	assign a1 = SW[3:0];
@@ -22,7 +23,7 @@ module lab3 (
 	);
 
 	seven_segment_driver U2 (
-		.num_in(f),
+		.num_in(f_display),
 		.seg_out(hex0)
 	);
 
@@ -40,8 +41,18 @@ module lab3 (
 	assign HEX0 = hex0;
 
 	always @(*) begin
-		HEX4 = (SW[4] == 1'b0) ? 8'b11110001 : 8'b11111101;
-		HEX1 = 8'b11111111; //Temp value
+		HEX4 = (SW[4] == 0) ? 8'b10001111 : 8'b10111111;
+
+		f_display = f;
+
+		if (SW[4] == 0 && c_out == 1) begin
+			HEX1 = 8'b11111001;
+		end else if (SW[4] == 1 && c_out == 0) begin
+			HEX1 = 8'b10111111;
+			f_display = ~f + 1;
+		end else begin
+			HEX1 = 8'b11111111;
+		end
 	end
 	
 endmodule
