@@ -1,5 +1,5 @@
 module ShotClock (
-    input        CLOCK_25MHz,
+    input        CLOCK_50MHz,
     input        reset_btn,    
     input        pause_btn,   
     input        mode_sw,
@@ -20,11 +20,11 @@ module ShotClock (
     wire [4:0]  max_time = mode_sw ? 5'd30 : 5'd24;
 
     ClockDivider cd (
-        .clock_in  (CLOCK_25MHz),
+        .clock_in  (CLOCK_50MHz),
         .clock_out (clk_1hz)
     );
 
-    always @(posedge CLOCK_25MHz) begin
+    always @(posedge CLOCK_50MHz) begin
         pause_prev <= pause;
 
         if (reset) begin
