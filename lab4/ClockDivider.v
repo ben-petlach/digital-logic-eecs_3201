@@ -7,8 +7,8 @@ module ClockDivider (
     output clock_out   // 1 Hz output clock
 );
 
-    reg [25:0] counter;
-    reg        clock_reg;
+    reg [25:0] counter = 26'd0;
+    reg        clock_reg = 1'b0;
 
     // 50 MHz / 2 = 25,000,000 counts per half-period
     // Toggle every 25,000,000 cycles -> 1 Hz full period

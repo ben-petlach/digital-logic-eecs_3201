@@ -34,7 +34,7 @@ module ShotClock (
         end
     end
 
-    always @(posedge clk_1hz) begin
+    always @(posedge clk_1hz or posedge reset) begin
         if (reset) begin
             count <= max_time;
         end else if (!paused && count > 5'd0) begin
