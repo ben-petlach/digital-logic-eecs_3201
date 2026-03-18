@@ -1,5 +1,5 @@
 module ShotClock (
-    input        MAX10_CLK1_50,
+    input        CLOCK_50MHz,
     input        reset_btn,    
     input        pause_btn,   
     input        mode_sw,
@@ -13,20 +13,20 @@ module ShotClock (
 
     reg         pause_prev;       
     reg         paused;           
-    reg  [4:0]  count;            
-    reg  [3:0]  ones, tens;
 
-    wire [7:0]  HEX0_raw, HEX1_raw;       
+    reg  [4:0]  count;            
+    reg  [3:0]  ones, tens;       
 
     wire [4:0]  max_time = mode_sw ? 5'd30 : 5'd24;
 
     ClockDivider cd (
-        .clock_in  (MAX10_CLK1_50),
+        .clock_in  (CLOCK_50MHz),
         .clock_out (clk_1hz)
     );
 
-    always @(posedge MAX10_CLK1_50) begin
+    always @(posedge CLOCK_50MHz) begin
         pause_prev <= pause;
+
         if (reset) begin
             paused <= 1'b0;
         end else if (pause && !pause_prev) begin
@@ -49,16 +49,12 @@ module ShotClock (
 
     seven_segment_driver u_ones (
         .num_in  (ones),
-        .seg_out (HEX0_raw)
+        .seg_out (HEX0)
     );
 
     seven_segment_driver u_tens (
         .num_in  (tens),
-        .seg_out (HEX1_raw)
+        .seg_out (HEX1)
     );
-
-    // Invert for common-anode displays (active-low on DE10-Lite)
-    assign HEX0 = ~HEX0_raw;
-    assign HEX1 = ~HEX1_raw;
 
 endmodule
