@@ -58,6 +58,8 @@ module test1_tb();
         tb_b = 1;
         tb_c = 1;
 
+        #20;
+
         $stop;
     end
 
