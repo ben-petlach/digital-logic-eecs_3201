@@ -15,7 +15,7 @@ module test2_tb();
 
     always @(tb_r) begin
         if (tb_r == 4'b0000) begin
-            $display("All outputs are zero");
+            $display("All outputs are zero at time = %0t nanoseconds", $time);
         end
     end
 

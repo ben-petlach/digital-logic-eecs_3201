@@ -14,7 +14,7 @@ module test1_tb();
 
     always @(tb_x, tb_y) begin
         if (tb_x == 0 && tb_y == 0) begin
-            $display("All outputs are zero");
+            $display("All outputs are zero at time = %0t nanoseconds", $time);
         end
     end
 
